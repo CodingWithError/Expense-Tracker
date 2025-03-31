@@ -1,0 +1,263 @@
+/* src/Styles/ExpenseForm.css */
+.expense-form-container {
+  max-width: 600px;
+  margin: 10px auto;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.expense-form-container h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #333;
+  text-align: center;
+  font-size: 24px;
+}
+
+.form-step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-step-header h3 {
+  margin: 0;
+  color: #0066cc;
+  font-size: 18px;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 10px;
+}
+
+.step {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ddd;
+}
+
+.step.active {
+  background-color: #0066cc;
+}
+
+.quick-categories {
+  margin-bottom: 25px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.quick-categories p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #555;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-btn {
+  background-color: #e9ecef;
+  color: #333;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+  width: auto;
+}
+
+.category-btn:hover {
+  background-color: #dee2e6;
+  transform: translateY(-2px);
+}
+
+.selected-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background-color: #e6f3ff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.selected-category p {
+  margin: 0;
+  color: #0066cc;
+}
+
+.change-btn {
+  background-color: transparent;
+  color: #0066cc;
+  border: 1px solid #0066cc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  width: auto;
+}
+
+.change-btn:hover {
+  background-color: #f0f7ff;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #0066cc;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.next-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #0066cc;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.next-btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.next-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.back-btn {
+  flex: 1;
+  padding: 14px;
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #e9ecef;
+}
+
+button[type="submit"] {
+  flex: 2;
+  padding: 14px;
+  background-color: #0066cc;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+button[type="submit"]:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+button.loading {
+  position: relative;
+  cursor: wait;
+}
+
+.message {
+  margin-bottom: 25px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .expense-form-container {
+    margin: 0;
+    padding: 20px;
+    border-radius: 0;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .back-btn, button[type="submit"] {
+    width: 100%;
+  }
+}
