@@ -51,7 +51,6 @@
   display: block;
   margin-bottom: 8px;
   font-weight: 600;
-  color: #333;
 }
 
 .form-group input {
@@ -81,9 +80,6 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
 
 .error {
   color: #e53935;

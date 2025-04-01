@@ -1,0 +1,645 @@
+/* src/Styles/BudgetPlanner.css */
+.budget-planner {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  padding: 30px;
+  animation: fadeIn 0.3s ease-out;
+  transition: all var(--transition-speed);
+}
+
+.budget-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.budget-header h2 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.budget-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.refresh-btn {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all var(--transition-speed);
+}
+
+.refresh-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: rotate(180deg);
+}
+
+.add-budget-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.add-budget-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Form Styling */
+.budget-form-container {
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  animation: slideDown 0.3s ease-out;
+}
+
+.budget-form-container h3 {
+  margin: 0 0 20px 0;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.budget-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: all var(--transition-speed);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Budget Summary Styling */
+.budget-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.total-budget {
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-budget h3 {
+  margin: 0 0 15px 0;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.budget-amount {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 20px 0;
+}
+
+.budget-stats {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.stat-label {
+  color: var(--text-color);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stat-value {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.budget-progress.overall {
+  margin-top: 15px;
+}
+
+.budget-chart {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--card-shadow);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.chart-header h3 {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.view-toggle {
+  display: flex;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  border: 1px solid var(--primary-light);
+}
+
+.view-btn {
+  padding: 8px 12px;
+  background-color: var(--card-bg);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-size: 14px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.view-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.sort-select {
+  padding: 8px 12px;
+  border: 1px solid var(--primary-light);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chart-container {
+  margin-top: 20px;
+  height: 300px;
+}
+
+/* Budget List Styling */
+.budget-list {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--card-shadow);
+}
+
+.budget-list h3 {
+  margin: 0 0 20px 0;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.budget-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.budget-item {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid #eee;
+  transition: all var(--transition-speed);
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.budget-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.budget-item.good {
+  border-left: 4px solid var(--success-color);
+}
+
+.budget-item.warning {
+  border-left: 4px solid var(--warning-color);
+}
+
+.budget-item.exceeded {
+  border-left: 4px solid var(--error-color);
+}
+
+.budget-item-header {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+}
+
+.budget-category {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.budget-category h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.budget-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edit-btn {
+  color: var(--primary-color);
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  color: var(--error-color);
+}
+
+.delete-btn:hover {
+  background-color: #ffebee;
+  transform: translateY(-2px);
+}
+
+.budget-details {
+  padding: 15px;
+}
+
+.budget-info {
+  margin-bottom: 15px;
+}
+
+.budget-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.budget-info strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.budget-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--success-color);
+  border-radius: 10px;
+  transition: width 0.5s ease-out;
+}
+
+.budget-item.warning .progress-fill {
+  background-color: var(--warning-color);
+}
+
+.budget-item.exceeded .progress-fill {
+  background-color: var(--error-color);
+}
+
+.progress-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Improve budget status styles */
+.budget-item .budget-info p:last-child strong {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.budget-item.good .budget-info p:last-child strong {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success-color);
+}
+
+.budget-item.warning .budget-info p:last-child strong {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: var(--warning-color);
+}
+
+.budget-item.exceeded .budget-info p:last-child strong {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var(--error-color);
+}
+
+/* Loading & Empty States */
+.loading-budgets, .no-budgets {
+  padding: 50px;
+  text-align: center;
+  color: var(--text-color);
+  font-family: 'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', system-ui, -apple-system, sans-serif;
+}
+
+.loading-budgets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.no-budgets p {
+  font-size: 16px;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-color);
+}
+
+/* Animation for buttons with emojis */
+.add-budget-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover,
+.refresh-btn:hover,
+.view-btn:hover {
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Make emojis look better in the select and all text */
+.emoji-select,
+.budget-category h4,
+.budget-info p,
+h3,
+.budget-header h2,
+.budget-form-container h3,
+.loading-budgets,
+.no-budgets p,
+.view-btn,
+.sort-select {
+  font-family: 'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', system-ui, -apple-system, sans-serif;
+}
+
+/* Ensure emojis in pie chart are visible */
+.recharts-layer .recharts-sector + text {
+  font-family: 'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .budget-item {
+  border-color: #333;
+}
+
+[data-theme="dark"] .budget-item-header {
+  border-color: #333;
+}
+
+[data-theme="dark"] .progress-bar {
+  background-color: #333;
+}
+
+[data-theme="dark"] .delete-btn:hover {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+[data-theme="dark"] .edit-btn:hover {
+  background-color: rgba(0, 102, 204, 0.1);
+}
+
+/* Fix the text colors in dark mode */
+[data-theme="dark"] .budget-info p {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .budget-info strong {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .progress-text {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .emoji-select,
+[data-theme="dark"] .budget-category h4,
+[data-theme="dark"] h3,
+[data-theme="dark"] .budget-header h2,
+[data-theme="dark"] .budget-form-container h3,
+[data-theme="dark"] .loading-budgets,
+[data-theme="dark"] .no-budgets p {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .recharts-layer .recharts-sector + text {
+  fill: #fff !important;
+}
+
+[data-theme="dark"] .view-btn {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .recharts-cartesian-axis-tick-value {
+  fill: #e0e0e0;
+}
+
+[data-theme="dark"] .recharts-cartesian-grid line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background-color: #333 !important;
+  border-color: #444 !important;
+}
+
+[data-theme="dark"] .recharts-tooltip-item-name,
+[data-theme="dark"] .recharts-tooltip-item-value {
+  color: #e0e0e0 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .budget-planner {
+    padding: 20px;
+  }
+
+  .budget-form {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-items {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .chart-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .budget-amount {
+    font-size: 28px;
+  }
+}

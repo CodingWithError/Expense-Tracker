@@ -11,34 +11,34 @@ const ExpenseForm = ({ userId, onSuccess }) => {
   const [formStep, setFormStep] = useState(1);
   const [recentCategories, setRecentCategories] = useState([]);
 
-  // Categories for dropdown
   const categories = [
-    'Food & Dining',
-    'Transportation',
-    'Entertainment',
-    'Utilities',
-    'Housing',
-    'Shopping',
-    'Healthcare',
-    'Education',
-    'Travel',
-    'Personal Care',
-    'Other'
+    { name: 'Food & Dining', emoji: '🍽️' },
+    { name: 'Transportation', emoji: '🚗' },
+    { name: 'Entertainment', emoji: '🎬' },
+    { name: 'Utilities', emoji: '💡' },
+    { name: 'Housing', emoji: '🏠' },
+    { name: 'Shopping', emoji: '🛍️' },
+    { name: 'Healthcare', emoji: '🏥' },
+    { name: 'Education', emoji: '📚' },
+    { name: 'Travel', emoji: '✈️' },
+    { name: 'Personal Care', emoji: '💇' },
+    { name: 'Other', emoji: '📌' }
   ];
 
-  // Get today's date as default value
+  const getEmoji = (categoryName) => {
+    const found = categories.find(cat => cat.name === categoryName);
+    return found ? found.emoji : '📋';
+  };
+
   const today = new Date().toISOString().split('T')[0];
 
-  // Initialize date with today's date when component mounts
   useEffect(() => {
     setDate(today);
     
-    // Get user's recent categories
     try {
       const allExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
       const userExpenses = allExpenses.filter(expense => expense.userId === userId);
       
-      // Get most recent unique categories (up to 3)
       const recent = [...new Set(userExpenses.map(exp => exp.category))].slice(0, 3);
       setRecentCategories(recent);
     } catch (error) {
@@ -54,13 +54,11 @@ const ExpenseForm = ({ userId, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Basic validation
     if (!amount || !category || !date) {
       setMessage({ text: 'Please fill all required fields', type: 'error' });
       return;
     }
 
-    // Convert amount to number
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
       setMessage({ text: 'Please enter a valid amount', type: 'error' });
@@ -70,42 +68,36 @@ const ExpenseForm = ({ userId, onSuccess }) => {
     try {
       setIsLoading(true);
       
-      // Create expense object to store
       const expenseData = {
-        id: Date.now().toString(), // Generate unique ID
+        id: Date.now().toString(),
         amount: amountNum,
         category,
         date,
         description,
-        userId, // To link expense with user
+        userId,
         createdAt: new Date()
       };
 
-      // Get existing expenses from localStorage
       const existingExpenses = JSON.parse(localStorage.getItem('expenses') || '[]');
       
-      // Add new expense to the array
       const updatedExpenses = [expenseData, ...existingExpenses];
       
-      // Save back to localStorage
       localStorage.setItem('expenses', JSON.stringify(updatedExpenses));
       
-      // Reset form after successful submission
       setAmount('');
       setCategory('');
       setDate(today);
       setDescription('');
       setFormStep(1);
+      
       setMessage({ text: 'Expense added successfully!', type: 'success' });
       
-      // Call onSuccess callback if provided
       if (onSuccess) {
         setTimeout(() => {
           onSuccess();
         }, 1500);
       }
       
-      // Clear success message after 3 seconds
       setTimeout(() => {
         setMessage({ text: '', type: '' });
       }, 3000);
@@ -139,7 +131,7 @@ const ExpenseForm = ({ userId, onSuccess }) => {
                 className="category-btn"
                 onClick={() => handleCategoryQuickSelect(cat)}
               >
-                {cat}
+                {getEmoji(cat)} {cat}
               </button>
             ))}
           </div>
@@ -153,10 +145,11 @@ const ExpenseForm = ({ userId, onSuccess }) => {
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
+          className="emoji-select"
         >
           <option value="">Select a category</option>
           {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat.name} value={cat.name}>{cat.emoji} {cat.name}</option>
           ))}
         </select>
       </div>
@@ -183,7 +176,7 @@ const ExpenseForm = ({ userId, onSuccess }) => {
       </div>
       
       <div className="selected-category">
-        <p>Category: <strong>{category}</strong></p>
+        <p>Category: <strong>{getEmoji(category)} {category}</strong></p>
         <button 
           type="button" 
           className="change-btn"
@@ -242,7 +235,7 @@ const ExpenseForm = ({ userId, onSuccess }) => {
           className={isLoading ? 'loading' : ''}
           disabled={isLoading || !amount}
         >
-          {isLoading ? 'Adding...' : 'Add Expense'}
+          {isLoading ? 'Adding...' : 'Add Expense 💰'}
         </button>
       </div>
     </>
@@ -250,11 +243,11 @@ const ExpenseForm = ({ userId, onSuccess }) => {
 
   return (
     <div className="expense-form-container">
-      <h2>Add New Expense</h2>
+      <h2>Add New Expense 📝</h2>
       
       {message.text && (
         <div className={`message ${message.type}`}>
-          {message.text}
+          {message.type === 'success' ? '✅ ' : '❌ '}{message.text}
         </div>
       )}
       

@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import ExpenseForm from './ExpenseForm';
 import ExpenseList from './ExpenseList';
 import QuickStats from './QuickStats';
+import BudgetPlanner from './BudgetPlanner';
 import Login from './Login';
 import '../Styles/DashBoard.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('list'); // 'list', 'add', or 'stats'
+  const [activeTab, setActiveTab] = useState('list');
+  const [showNotification, setShowNotification] = useState(false);
+  const [notification, setNotification] = useState({ message: '', type: '' });
+  const [theme, setTheme] = useState(() => localStorage.getItem('appTheme') || 'light');
 
   useEffect(() => {
-    // Simulate authentication check
     const checkAuth = () => {
-      // Check if user data exists in localStorage
       const userData = localStorage.getItem('expenseTrackerUser');
       if (userData) {
         setUser(JSON.parse(userData));
@@ -21,20 +23,33 @@ const Dashboard = () => {
       setLoading(false);
     };
     
-    // Simulate a short delay like a real auth check
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('appTheme', theme);
+    
     const timer = setTimeout(checkAuth, 500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [theme]);
 
   const handleLogout = () => {
-    // Clear user data from localStorage
     localStorage.removeItem('expenseTrackerUser');
     setUser(null);
   };
 
-  // Handle tab switching with a single state
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+  };
+  
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+  };
+  
+  const showNotificationMessage = (message, type = 'info') => {
+    setNotification({ message, type });
+    setShowNotification(true);
+    
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
   };
 
   if (loading) {
@@ -46,7 +61,6 @@ const Dashboard = () => {
     );
   }
 
-  // If no user is logged in, show login component
   if (!user) {
     return <Login onLogin={setUser} />;
   }
@@ -54,9 +68,20 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>Expense Tracker</h1>
-        <div className="user-info">
-          <span>Welcome, {user.email}</span>
+        <div className="header-left">
+          <h1>Expense Tracker</h1>
+        </div>
+        <div className="header-right">
+          <div className="user-info">
+            <span>Welcome, Tester</span>
+          </div>
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
           <button 
             className="logout-btn"
             onClick={handleLogout}
@@ -83,18 +108,48 @@ const Dashboard = () => {
           className={`tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
           onClick={() => handleTabChange('stats')}
         >
-          Quick Stats
+          Analytics
+        </button>
+        <button 
+          className={`tab-btn ${activeTab === 'budget' ? 'active' : ''}`}
+          onClick={() => handleTabChange('budget')}
+        >
+          Budget Planner
         </button>
       </div>
       
       <main className="dashboard-main">
-        {activeTab === 'list' && <ExpenseList userId={user.id} />}
-        {activeTab === 'add' && <ExpenseForm userId={user.id} onSuccess={() => handleTabChange('list')} />}
+        {activeTab === 'list' && <ExpenseList userId={user.id} onShowNotification={showNotificationMessage} />}
+        
+        {activeTab === 'add' && (
+          <ExpenseForm 
+            userId={user.id} 
+            onSuccess={() => {
+              handleTabChange('list');
+              showNotificationMessage('Expense added successfully!', 'success');
+            }} 
+          />
+        )}
+        
         {activeTab === 'stats' && <QuickStats userId={user.id} />}
+        
+        {activeTab === 'budget' && <BudgetPlanner userId={user.id} onShowNotification={showNotificationMessage} />}
       </main>
 
+      {showNotification && (
+        <div className={`notification ${notification.type}`}>
+          <p>{notification.message}</p>
+          <button 
+            onClick={() => setShowNotification(false)}
+            className="notification-close"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
       <footer className="dashboard-footer">
-        <p>Expense Tracker &copy; {new Date().getFullYear()}</p>
+        <p>By CodingWithError</p>
       </footer>
     </div>
   );

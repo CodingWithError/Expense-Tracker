@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../Styles/Login.css';
-// Fix image paths - make sure these files exist with correct extensions
 import guyImage from '../assets/guy.jpg.jpeg';
 
 function Login({ onLogin }) {
